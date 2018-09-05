@@ -33,6 +33,7 @@
     "jest": "20.0.4",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "nprogress": "^0.2.0",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
@@ -95,7 +96,36 @@
   },
   "babel": {
     "presets": [
-      "react-app"
+      "react-app",
+      [
+        "env",
+        {
+          "modules": false,
+          "useBuiltIns": "usage"
+        }
+      ],
+      "react",
+      "jest"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          "react"
+        ],
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ]
+      }
+    },
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": "css"
+        }
+      ]
     ]
   },
   "eslintConfig": {

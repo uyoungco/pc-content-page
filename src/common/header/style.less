@@ -1,0 +1,59 @@
+#head {
+  a {
+    color: #fff;
+  }
+  &:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  min-width: 1170px;
+  height: auto;
+  line-height: normal;
+  background-color: #333;
+  .container {
+    max-width: 1170px;
+    width: auto;
+    transition: max-width .2s linear;
+    position: relative;
+    height: 35px;
+    background-color: #333;
+    margin: 0 auto;
+  }
+  .logo {
+    display: inline-block;
+    border-radius: 0;
+    height: 35px;
+    width: 130px;
+    background: url('data:image/png;base64,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') no-repeat #d43d3d center;
+  }
+  .nnav-items {
+    height: 35px;
+    position: relative;
+    li {
+      display: inline-block;
+      height: 35px;
+      vertical-align: top;
+      margin-left: 20px;
+      a {
+        height: 35px;
+        line-height: 35px;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 14px;
+      }
+    }
+  }
+  .header-right {
+    float: right;
+  }
+}
+
+#nnav {
+  display: inline-block;
+  vertical-align: top;
+}

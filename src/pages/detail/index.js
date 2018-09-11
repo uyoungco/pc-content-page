@@ -5,18 +5,16 @@ import Main from './components/main'
 
 import './style.less'
 
-class Home extends React.Component {
+class Detail extends React.Component {
   render() {
     return (
       <div id="body">
-        <DetailFlow>
-        </DetailFlow>
-        <div className="fragment"></div>
-        <Main>
-        </Main>
+        <DetailFlow />
+        <div className="fragment" />
+        <Main />
       </div>
     )
   }
 }
 
-export default Home
+export default Detail

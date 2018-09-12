@@ -23,11 +23,9 @@ const ThreePicture = props => (
         </a>
       </p>
       <p className="info">
-        <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span>
-        <span>
-          <a href="/" className="cmt-num">来源</a>
-        </span>
-        <span className="render-time">{props.data.get('newstime')}</span>
+        <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span> {/* 栏目 */}
+        <span><a href="/" className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
+        <span className="render-time">{props.data.get('newstime')}</span> {/* 时间 */}
       </p>
       <div className="operate">
         <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
@@ -46,6 +44,7 @@ const OnePicture = props => (
       <h1><a href="/">{props.data.get('title')}</a></h1>
       <p className="info">
         <span className="newstag" style={{color: "#5996fd"}}>{props.data.get('classname')}</span>
+        <span><a href="/" className="cmt-num">{props.data.get('befrom')}</a></span>
         <span className="render-time">{props.data.get('newstime')}</span>
       </p>
       <div className="operate">
@@ -93,7 +92,6 @@ class DetailFlow extends PureComponent {
 
     return (
       <div id="detail_flow" className="totop_fixed">
-
         <InfiniteScroll
           // initialLoad={false}
           useWindow={false}

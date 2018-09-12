@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import InfiniteScroll from 'react-infinite-scroller'
@@ -30,7 +30,7 @@ const ThreePicture = props => (
         <span className="render-time">{props.data.get('newstime')}</span>
       </p>
       <div className="operate">
-        <a onClick={() => props.handelItemDetele(props.data.get('id'))} className="del"><span>不感兴趣</span></a>
+        <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@ const OnePicture = props => (
         <span className="render-time">{props.data.get('newstime')}</span>
       </p>
       <div className="operate">
-        <a onClick={() => props.handelItemDetele(props.data.get('id'))} className="del"><span>不感兴趣</span></a>
+        <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
       </div>
     </div>
   </div>
@@ -74,33 +74,25 @@ const MaxAds = props => (
   </div>
 )
 
-class DetailFlow extends React.Component {
+class DetailFlow extends PureComponent {
   render() {
+
     let items = [];
-    this.props.detailList.map(item => item.map((itemm) => {
-      if (itemm.get('titlepic') && itemm.get('titlepic2')) {
+    this.props.detailList.map((item, index) => {
+      if (item.get('titlepic') && item.get('titlepic2')) {
         items.push(
-          <ThreePicture key={itemm.get('id')}  data={itemm} handelItemDetele={this.props.handelItemDetele}/>
+          <ThreePicture key={item.get('id')}  index={index} data={item} handelItemDetele={this.props.handelItemDetele}/>
         )
-      } else if (itemm.get('titlepic')) {
+      } else if (item.get('titlepic')) {
         items.push(
-          <OnePicture key={itemm.get('id')}  data={itemm} handelItemDetele={this.props.handelItemDetele}/>
+          <OnePicture key={item.get('id')} index={index}  data={item} handelItemDetele={this.props.handelItemDetele}/>
         )
       }
-
-    }))
+    })
 
 
     return (
       <div id="detail_flow" className="totop_fixed">
-        {/* {
-          data.map((item, index) => {
-            return [
-              <ThreePicture key={index}></ThreePicture>,
-              <OnePicture key={index}></OnePicture>
-            ]
-          })
-        } */}
 
         <InfiniteScroll
           // initialLoad={false}
@@ -130,8 +122,8 @@ const mapDispatch = dispatch => {
     loadItems(page) {
       dispatch(actionCreators.getItemList(page))
     },
-    handelItemDetele(id) {
-      dispatch(actionCreators.deteleItemList(id))
+    handelItemDetele(index) {
+      dispatch(actionCreators.deteleItemList(index))
     }
   }
 }

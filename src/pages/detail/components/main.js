@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 
 import '../style.less'
 // 广告模块
@@ -10,7 +10,7 @@ import DayHotNewsBottonAds from '../ADS/day_hot_news_botton_gg'
 import DayHotNews from  './day-hot-news'
 import WonderfulRecommend from './wonderful-recommend'
 
-class Main extends React.Component {
+class Main extends PureComponent {
   render() {
     return (
       <div id="main">

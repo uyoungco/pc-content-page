@@ -12,13 +12,10 @@ const addItemList = data => ({
 
 
 
-export const deteleItemList = id => {
-  console.log('id', id)
-  return {
-    type: constants.DETELE_ITEM_LIST,
-    id
-  }
-}
+export const deteleItemList = index => ({
+  type: constants.DETELE_ITEM_LIST,
+  index
+})
 
 export const getItemList = page => {
   return dispatch => {

@@ -79,11 +79,11 @@ class DetailFlow extends PureComponent {
 
     let items = [];
     this.props.detailList.map((item, index) => {
-      if (item.get('titlepic') && item.get('titlepic2')) {
+      if (item.get('titlepic') && item.get('titlepic2') && item.get('titlepic3')) {
         items.push(
           <ThreePicture key={item.get('id')}  index={index} data={item} handelItemDetele={this.props.handelItemDetele}/>
         )
-      } else if (item.get('titlepic')) {
+      } else if (item.get('titlepic') || item.get('titlepic2')) {
         items.push(
           <OnePicture key={item.get('id')} index={index}  data={item} handelItemDetele={this.props.handelItemDetele}/>
         )

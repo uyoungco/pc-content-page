@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { Spin } from 'antd';
 
 import InfiniteScroll from 'react-infinite-scroller'
 
@@ -10,21 +11,21 @@ import '../style.less'
 const ThreePicture = props => (
   <div className="newslist newsitem">
     <div className="content">
-      <h1><a href="/" >{props.data.get('title')}</a></h1>
+      <h1><a onClick={() => props.getDetailContent(props.data.get('id'))} >{props.data.get('title')}</a></h1>
       <p className="pic3">
-        <a href="/" className="hover-scale">
+        <a  className="hover-scale">
           <img src={props.data.get('titlepic')} alt="" />
         </a>
-        <a href="/" className="hover-scale">
+        <a onClick={() => props.getDetailContent(props.data.get('id'))} className="hover-scale">
           <img src={props.data.get('titlepic2')} alt="" />
         </a>
-        <a href="/" className="hover-scale">
+        <a onClick={() => props.getDetailContent(props.data.get('id'))} className="hover-scale">
           <img  src={props.data.get('titlepic3')} alt="" />
         </a>
       </p>
       <p className="info">
         <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span> {/* 栏目 */}
-        <span><a href="/" className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
+        <span><a onClick={() => props.getDetailContent(props.data.get('id'))}  className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
         <span className="render-time">{props.data.get('newstime')}</span> {/* 时间 */}
       </p>
       <div className="operate">
@@ -38,13 +39,13 @@ const ThreePicture = props => (
 const OnePicture = props => (
   <div className="newslist newsitem oneimg">
     <p className="hover-scale pic">
-      <a href="/"><img src={props.data.get('titlepic')} alt=""/></a>
+      <a onClick={() => props.getDetailContent(props.data.get('id'))}><img src={props.data.get('titlepic')} alt=""/></a>
     </p>
     <div className="content">
-      <h1><a href="/">{props.data.get('title')}</a></h1>
+      <h1><a onClick={() => props.getDetailContent(props.data.get('id'))}>{props.data.get('title')}</a></h1>
       <p className="info">
         <span className="newstag" style={{color: "#5996fd"}}>{props.data.get('classname')}</span>
-        <span><a href="/" className="cmt-num">{props.data.get('befrom')}</a></span>
+        <span><a onClick={() => props.getDetailContent(props.data.get('id'))} className="cmt-num">{props.data.get('befrom')}</a></span>
         <span className="render-time">{props.data.get('newstime')}</span>
       </p>
       <div className="operate">
@@ -73,38 +74,49 @@ const MaxAds = props => (
   </div>
 )
 
-class DetailFlow extends PureComponent {
-  render() {
+const DetailFlow = props => {
 
-    let items = [];
-    this.props.detailList.map((item, index) => {
-      if (item.get('titlepic') && item.get('titlepic2') && item.get('titlepic3')) {
-        items.push(
-          <ThreePicture key={item.get('id')}  index={index} data={item} handelItemDetele={this.props.handelItemDetele}/>
-        )
-      } else if (item.get('titlepic') || item.get('titlepic2')) {
-        items.push(
-          <OnePicture key={item.get('id')} index={index}  data={item} handelItemDetele={this.props.handelItemDetele}/>
-        )
-      }
-    })
+  let items = [];
+  props.detailList.map((item, index) => {
+    if (item.get('titlepic') && item.get('titlepic2') && item.get('titlepic3')) {
+      items.push(
+        <ThreePicture
+          key={item.get('id')}
+          index={index}
+          data={item}
+          handelItemDetele={props.handelItemDetele}
+          getDetailContent={props.getDetailContent}
+        />
+      )
+    } else if (item.get('titlepic') || item.get('titlepic2')) {
+      items.push(
+        <OnePicture
+          key={item.get('id')}
+          index={index}
+          data={item}
+          handelItemDetele={props.handelItemDetele}
+          getDetailContent={props.getDetailContent}
+        />
+      )
+    }
+  })
 
 
-    return (
-      <div id="detail_flow" className="totop_fixed">
-        <InfiniteScroll
-          // initialLoad={false}
-          useWindow={false}
-          pageStart={0}
-          loadMore={(page) => this.props.loadItems(page)}
-          hasMore={this.props.hasMoreItems}
-          loader={<div className="loader" key={0}>Loading ...</div>}
-        >
-          {items}
-        </InfiniteScroll>
-      </div>
-    )
-  }
+  return (
+    <div id="detail_flow" className="totop_fixed">
+      <InfiniteScroll
+        // initialLoad={false}
+        useWindow={false}
+        pageStart={0}
+        loadMore={(page) => props.loadItems(page)}
+        hasMore={props.hasMoreItems}
+        // loader={<div className="loader" key={0}>Loading ...</div>}
+        loader={<div key={0} className="demo-loading-container"><Spin /></div>}
+      >
+        {items}
+      </InfiniteScroll>
+    </div>
+  )
 }
 
 
@@ -122,6 +134,10 @@ const mapDispatch = dispatch => {
     },
     handelItemDetele(index) {
       dispatch(actionCreators.deteleItemList(index))
+    },
+    getDetailContent(id) {
+      window.scroll(0, 0)
+      dispatch(actionCreators.handleGetDetailContent(id))
     }
   }
 }

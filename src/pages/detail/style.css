@@ -249,6 +249,9 @@
   margin-right: auto !important;
   max-width: 100% !important;
   background-color: #f1f0f0;
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+  text-align: center!important;
 }
 #main .content p {
   display: block !important;
@@ -361,6 +364,9 @@
   color: #000;
   vertical-align: middle;
 }
+#day_hot_news .aside-items .aside-item .hot_news_right a:hover {
+  color: #d43d3d;
+}
 #day_hot_news .aside-items .aside-item .hot_news_right .hot_news_title {
   display: block;
   font-size: 14px;
@@ -376,10 +382,17 @@
   bottom: 9px;
   height: 12px;
   line-height: 12px;
+  overflow: hidden;
 }
-#day_hot_news .aside-items .aside-item .hot_news_right .hot_news_info .hot_news_cmt {
+#day_hot_news .aside-items .aside-item .hot_news_right .hot_news_info .hot_news_cmt,
+#day_hot_news .aside-items .aside-item .hot_news_right .hot_news_info .hot_news_catename {
   font-size: 12px;
   display: inline;
+}
+#day_hot_news .aside-items .aside-item .hot_news_right .hot_news_info .hot_news_catename {
+  margin-right: 5px;
+  padding: 2px 5px;
+  border-right: solid 1px #000;
 }
 .wonderful-recommend .aside-items {
   margin: 0;
@@ -414,6 +427,9 @@
   margin-top: 8px;
   overflow: hidden;
   font-weight: 400;
+}
+.wonderful-recommend .aside-item h3:hover {
+  color: #d43d3d;
 }
 .wonderful-recommend .aside-item:nth-child(3n+1),
 .wonderful-recommend .aside-item:nth-child(3n+2) {

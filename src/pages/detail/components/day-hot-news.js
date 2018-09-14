@@ -17,6 +17,7 @@ const DayHotNews = props => {
             <p className="hot_news_right">
             <a href={item.get('url')} target="_blank" className="hot_news_title">{item.get('title')}</a>
               <span className="hot_news_info">
+                <span className="hot_news_catename">{item.get('catename')}</span>
                 <span className="hot_news_cmt">{item.get('befrom')}</span>
               </span>
             </p>

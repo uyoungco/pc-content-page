@@ -15,6 +15,13 @@ const changeDetailContent = (title, befrom, newstime, articleContent) => ({
   newstime, // 时间
   articleContent: fromJS(articleContent) //文章内容 数组
 })
+const changeDetailBotton = data => ({
+  type: constants.CHANGE_DETAIL_BOOTON,
+  hotnews: fromJS(data.hotnews),
+  xgtj: fromJS(data.xgtj)
+})
+
+
 
 export const changePage = page => ({
   type: constants.CHANGE_PAGE,
@@ -36,7 +43,7 @@ export const getItemList = page => {
   }
 }
 //  文章内容获取
-export const handleGetDetailContent = id => {
+export const handleGetDetailContent = (id, cateid)  => {
   return dispatch => {
     const getdata = (data) => {
       let articleContentArr = []
@@ -50,15 +57,26 @@ export const handleGetDetailContent = id => {
       const articleContent = articleContentArr
       dispatch(changeDetailContent(title, befrom, newstime, articleContent))
     }
+
+
     if(id === 1) {
       const data = window.INIT_DETAIL_CONTENT
+      axios(`/m/news.php?cateid=${data.cateid}`)
+      .then(res => {
+        dispatch(changeDetailBotton(res.data))
+      })
       getdata(data)
     } else {
-      axios(`/m/news.php?newsid=${id}`)
+      axios(`/m/news.php?newsid=${id}&cateid=${cateid}`)
       // axios(`/m/news.php?newsid=1224826`)
       .then(res => {
-        getdata(res.data)
+        getdata(res.data.articleInfo[0])
+        dispatch(changeDetailBotton(res.data))
       }).catch( error => console.error(error) )  // 错误处理
     }
   };
 }
+
+
+
+

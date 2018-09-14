@@ -9,20 +9,16 @@ import './style.less'
 
 
 const LoadableDetailFlow = Loadable({
-  // loader: () => import('./'),
   loader: () => import('./components/detail_flow'),
   loading() {
     return <Spin size="large"></Spin>
-    // return <div>正在加载</div>
   },
 });
 
 const LoadableMain = Loadable({
-  // loader: () => import('./'),
   loader: () => import('./components/main'),
   loading() {
     return <Spin size="large"></Spin>
-    // return <div>正在加载</div>
   },
 });
 

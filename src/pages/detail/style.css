@@ -351,6 +351,9 @@
   margin-right: 15px;
   position: relative;
 }
+#day_hot_news .aside-items .aside-item .hot_news_img img {
+  height: 100%;
+}
 #day_hot_news .aside-items .aside-item .hot_news_right {
   display: inline-block;
   width: 207px;

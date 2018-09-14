@@ -10,7 +10,10 @@ const defaultState = fromJS({
   title: '', // 文章辩题
   befrom: '', // 来源
   newstime: '', // 时间
-  articleContent: [] // 文章内容
+  articleContent: [], // 文章内容
+
+  hotnews: [], // 24小时热问
+  xgtj: [] // 相关推荐
 });
 
 export default (state = defaultState, action) => {
@@ -32,6 +35,11 @@ export default (state = defaultState, action) => {
       })
     case constants.CHANGE_PAGE: // 翻页
       return state.set('page', action.page)
+    case constants.CHANGE_DETAIL_BOOTON:
+      return state.merge({
+        hotnews: action.hotnews,
+        xgtj: action.xgtj
+      })
     default:
       return state
   }

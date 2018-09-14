@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-
+import { Skeleton } from 'antd';
+import Loadable from 'react-loadable';
 
 import { actionCreators } from '../store'
 import '../style.less'
@@ -12,8 +13,19 @@ import DayHotNewsBottonAds from '../ADS/day_hot_news_botton_gg'
 // 栏目模块
 import DayHotNews from  './day-hot-news'
 import WonderfulRecommend from './wonderful-recommend'
-import DetailText from './detail_text'
+// import DetailText from './detail_text'
 
+
+const LoadableDetailText = Loadable({
+  loader: () => import('./detail_text'),
+  loading() {
+    return [
+      <Skeleton key={1} active />,
+      <Skeleton key={2} active />,
+      <Skeleton key={3} active />
+    ]
+  },
+});
 
 
 class Main extends PureComponent {
@@ -21,30 +33,37 @@ class Main extends PureComponent {
     this.props.initDetailText()
   }
   render() {
+    console.log(this.props.xgtj)
     return (
       <div id="main">
-        <ContentTopAds></ContentTopAds>
+        {/* <ContentTopAds /> 广告 文章内容头部 */}
         <div id="bd_article">
-          <DetailText />
-          <ContentBottonAds />
+          <LoadableDetailText />
+          {/* <ContentBottonAds />  广告 文章内容下 */}
           <DayHotNews
             title="24小时热文"
+            data={this.props.hotnews}
           />
-          <DayHotNewsBottonAds />
+          {/* <DayHotNewsBottonAds /> 热文下广告  */}
           <WonderfulRecommend
             title="相关推荐"
+            data={this.props.xgtj}
           />
-          <ContentBottonAds />
+          {/* <ContentBottonAds />  广告 页面最底部 */}
         </div>
       </div>
     )
   }
 }
 
+const mapState = state => ({
+  hotnews: state.getIn(['detail', 'hotnews']),
+  xgtj: state.getIn(['detail', 'xgtj'])
+})
 const mapDispatch = dispatch => ({
   initDetailText() {
     dispatch(actionCreators.handleGetDetailContent(1))
   }
 })
 
-export default connect(null, mapDispatch)(Main)
+export default connect(mapState, mapDispatch)(Main)

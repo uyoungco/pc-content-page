@@ -11,21 +11,21 @@ import '../style.less'
 const ThreePicture = props => (
   <div className="newslist newsitem">
     <div className="content">
-      <h1><a onClick={() => props.getDetailContent(props.data.get('id'))} >{props.data.get('title')}</a></h1>
+      <h1><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} >{props.data.get('title')}</a></h1>
       <p className="pic3">
-        <a  className="hover-scale">
+        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale" >
           <img src={props.data.get('titlepic')} alt="" />
         </a>
-        <a onClick={() => props.getDetailContent(props.data.get('id'))} className="hover-scale">
+        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale">
           <img src={props.data.get('titlepic2')} alt="" />
         </a>
-        <a onClick={() => props.getDetailContent(props.data.get('id'))} className="hover-scale">
+        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale">
           <img  src={props.data.get('titlepic3')} alt="" />
         </a>
       </p>
       <p className="info">
         <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span> {/* 栏目 */}
-        <span><a onClick={() => props.getDetailContent(props.data.get('id'))}  className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
+        <span><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}  className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
         <span className="render-time">{props.data.get('newstime')}</span> {/* 时间 */}
       </p>
       <div className="operate">
@@ -39,13 +39,13 @@ const ThreePicture = props => (
 const OnePicture = props => (
   <div className="newslist newsitem oneimg">
     <p className="hover-scale pic">
-      <a onClick={() => props.getDetailContent(props.data.get('id'))}><img src={props.data.get('titlepic')} alt=""/></a>
+      <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}><img src={props.data.get('titlepic')} alt=""/></a>
     </p>
     <div className="content">
-      <h1><a onClick={() => props.getDetailContent(props.data.get('id'))}>{props.data.get('title')}</a></h1>
+      <h1><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}>{props.data.get('title')}</a></h1>
       <p className="info">
         <span className="newstag" style={{color: "#5996fd"}}>{props.data.get('classname')}</span>
-        <span><a onClick={() => props.getDetailContent(props.data.get('id'))} className="cmt-num">{props.data.get('befrom')}</a></span>
+        <span><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="cmt-num">{props.data.get('befrom')}</a></span>
         <span className="render-time">{props.data.get('newstime')}</span>
       </p>
       <div className="operate">
@@ -135,9 +135,9 @@ const mapDispatch = dispatch => {
     handelItemDetele(index) {
       dispatch(actionCreators.deteleItemList(index))
     },
-    getDetailContent(id) {
+    getDetailContent(id, cateid) {
       window.scroll(0, 0)
-      dispatch(actionCreators.handleGetDetailContent(id))
+      dispatch(actionCreators.handleGetDetailContent(id, cateid))
     }
   }
 }

@@ -4,6 +4,7 @@ import { fromJS } from 'immutable'
 const defaultState = fromJS({
   detailList: [],
   hasMoreItems: true,
+  loading: false,
   page: 0, // 当前页
   totalPage: 0, // 总页数
 
@@ -40,6 +41,8 @@ export default (state = defaultState, action) => {
         hotnews: action.hotnews,
         xgtj: action.xgtj
       })
+    case constants.LOADING_START:
+      return state.set('loading', action.switchlo)
     default:
       return state
   }

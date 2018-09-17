@@ -14,18 +14,6 @@ class Header extends React.Component {
                 <li>
                   <a href="/" className="nnav-item">首页<span></span></a>
                 </li>
-                <li>
-                  <a href="/" className="nnav-item">首页<span></span></a>
-                </li>
-                <li>
-                  <a href="/" className="nnav-item">首页<span></span></a>
-                </li>
-                <li>
-                  <a href="/" className="nnav-item">首页<span></span></a>
-                </li>
-                <li>
-                  <a href="/" className="nnav-item">首页<span></span></a>
-                </li>
               </ul>
             </div>
           </div>

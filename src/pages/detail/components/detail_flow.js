@@ -8,52 +8,63 @@ import { actionCreators } from '../store'
 import '../style.less'
 
 // 三图传入 data
-const ThreePicture = props => (
-  <div className="newslist newsitem">
-    <div className="content">
-      <h1><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} >{props.data.get('title')}</a></h1>
-      <p className="pic3">
-        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale" >
-          <img src={props.data.get('titlepic')} alt="" />
-        </a>
-        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale">
-          <img src={props.data.get('titlepic2')} alt="" />
-        </a>
-        <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="hover-scale">
-          <img  src={props.data.get('titlepic3')} alt="" />
-        </a>
-      </p>
-      <p className="info">
-        <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span> {/* 栏目 */}
-        <span><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}  className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
-        <span className="render-time">{props.data.get('newstime')}</span> {/* 时间 */}
-      </p>
-      <div className="operate">
-        <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
+const ThreePicture = props => {
+  const id = props.data.get('id')
+  const cateid = props.data.get('cateid')
+  const url  = props.data.get('url')
+  return (
+    <div className="newslist newsitem">
+      <div className="content">
+        <h1><a onClick={() => props.getDetailContent(id, cateid, url)} >{props.data.get('title')}</a></h1>
+        <p className="pic3">
+          <a onClick={() => props.getDetailContent(id, cateid, url)} className="hover-scale" >
+            <img src={props.data.get('titlepic')} alt="" />
+          </a>
+          <a onClick={() => props.getDetailContent(id, cateid, url)} className="hover-scale">
+            <img src={props.data.get('titlepic2')} alt="" />
+          </a>
+          <a onClick={() => props.getDetailContent(id, cateid, url)} className="hover-scale">
+            <img  src={props.data.get('titlepic3')} alt="" />
+          </a>
+        </p>
+        <p className="info">
+          <span className="newstag" style={{color: '#68a285'}}>{props.data.get('classname')}</span> {/* 栏目 */}
+          <span><a onClick={() => props.getDetailContent(id, cateid, url)}  className="cmt-num">{props.data.get('befrom')}</a></span> {/* 来源 */}
+          <span className="render-time">{props.data.get('newstime')}</span> {/* 时间 */}
+        </p>
+        <div className="operate">
+          <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 // 单图
-const OnePicture = props => (
-  <div className="newslist newsitem oneimg">
-    <p className="hover-scale pic">
-      <a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}><img src={props.data.get('titlepic')} alt=""/></a>
-    </p>
-    <div className="content">
-      <h1><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))}>{props.data.get('title')}</a></h1>
-      <p className="info">
-        <span className="newstag" style={{color: "#5996fd"}}>{props.data.get('classname')}</span>
-        <span><a onClick={() => props.getDetailContent(props.data.get('id'), props.data.get('cateid'))} className="cmt-num">{props.data.get('befrom')}</a></span>
-        <span className="render-time">{props.data.get('newstime')}</span>
+const OnePicture = props => {
+  const id = props.data.get('id')
+  const cateid = props.data.get('cateid')
+  const url  = props.data.get('url')
+
+  return (
+    <div className="newslist newsitem oneimg">
+      <p className="hover-scale pic">
+        <a onClick={() => props.getDetailContent(id, cateid, url)}><img src={props.data.get('titlepic')} alt=""/></a>
       </p>
-      <div className="operate">
-        <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
+      <div className="content">
+        <h1><a onClick={() => props.getDetailContent(id, cateid, url)}>{props.data.get('title')}</a></h1>
+        <p className="info">
+          <span className="newstag" style={{color: "#5996fd"}}>{props.data.get('classname')}</span>
+          <span><a onClick={() => props.getDetailContent(id, cateid, url)} className="cmt-num">{props.data.get('befrom')}</a></span>
+          <span className="render-time">{props.data.get('newstime')}</span>
+        </p>
+        <div className="operate">
+          <a onClick={() => props.handelItemDetele(props.index)} className="del"><span>不感兴趣</span></a>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 // 大图广告
 const MaxAds = props => (

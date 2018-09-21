@@ -3,7 +3,7 @@ import { Spin } from 'antd';
 import { connect } from 'react-redux'
 
 import PaginAtion from './paginAtion'
-
+import BaiduAds from '../ADS/baiduAds_test'
 
 const DetailText = props => {
   const { title, befrom, newstime, articleContent, page, totalPage } = props
@@ -18,8 +18,15 @@ const DetailText = props => {
           <span className="bd_article_time">{newstime}</span>
         </p>
           <div className="content" dangerouslySetInnerHTML={{__html: newContent[page]}}></div>
-        { totalPage > 1 ? <PaginAtion /> : null }
       </Spin>
+      <div>
+        <BaiduAds
+          id="u3157509"
+        ></BaiduAds>
+
+
+      </div>
+      { totalPage > 1 ? <PaginAtion /> : null }
     </div>
   )
 }

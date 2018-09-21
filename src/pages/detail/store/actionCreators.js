@@ -1,6 +1,8 @@
+
 import axios from 'axios'
 import * as constants from './constants'
 import { fromJS } from 'immutable';
+// import NewsFeed from '../ADS/360ads'
 
 
 const addItemList = data => ({
@@ -49,17 +51,30 @@ export const getItemList = page => {
 //  文章内容获取
 export const handleGetDetailContent = (id, cateid)  => {
   return async dispatch => {
+    /* eslint-disable */
+    const mediavNewsFeed = new NewsFeed();
+    mediavNewsFeed.feedtype="index_xxl";
+    mediavNewsFeed.options.showid = window.channel_name.smartxxl.id;
+    const cheshi = (data) => ( console.log(data) )
+    mediavNewsFeed.take(10, cheshi)
+    console.log(mediavNewsFeed)
+
     dispatch(loadingStart(true))
     const getdata = (data) => {
       let articleContentArr = []
-      data.content.split('[!--empirenews.page--]')
+      data.content.split('[!--page--]')
       .filter(v => v)
       .map(v => articleContentArr.push(v))
 
       document.title =  `${data.title}-热点娱乐`
-      const host = window.origin
+      if(window.history.pushState) {
+        if (!window.location.origin) {
+          window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+        }
+        const host = window.location.origin
+        window.history.pushState({content: data.url,id:id},null, host + data.url)
+      }
 
-      window.history.pushState({content: data.url,id:id},null, host + data.url)
 
       const title = data.title
       const befrom = data.befrom

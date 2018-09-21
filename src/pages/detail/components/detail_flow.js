@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
+import { connect  } from 'react-redux'
 import { Spin } from 'antd';
 
 import InfiniteScroll from 'react-infinite-scroller'
@@ -85,49 +85,86 @@ const MaxAds = props => (
   </div>
 )
 
-const DetailFlow = props => {
-
+class DetailFlow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+  componentDidMount() {
+    // this.textInput.current.focusTextInput();
+    console.log('1111', this.textInput)
+  }
+  render() {
+  const {
+    handelItemDetele,
+    getDetailContent,
+    loadItems,
+    detailList,
+    hasMoreItems
+  }  = this.props
   let items = [];
-  props.detailList.map((item, index) => {
+  detailList.map((item, index) => {
     if (item.get('titlepic') && item.get('titlepic2') && item.get('titlepic3')) {
       items.push(
         <ThreePicture
           key={item.get('id')}
           index={index}
           data={item}
-          handelItemDetele={props.handelItemDetele}
-          getDetailContent={props.getDetailContent}
+          handelItemDetele={handelItemDetele}
+          getDetailContent={getDetailContent}
         />
       )
     } else if (item.get('titlepic') || item.get('titlepic2')) {
+      // const diyElement = ''
       items.push(
         <OnePicture
           key={item.get('id')}
           index={index}
           data={item}
-          handelItemDetele={props.handelItemDetele}
-          getDetailContent={props.getDetailContent}
+          handelItemDetele={handelItemDetele}
+          getDetailContent={getDetailContent}
+          // ref={(icon)=> {this.spinIcon = icon}}
+          ref={this.textInput}
         />
+        // <div className="newslist newsitem oneimg">
+        //   <p className="hover-scale pic">
+
+        //   </p>
+        //   <div className="content">
+        //     <h1>11111111111111111111111111111111</h1>
+        //     <p className="info">
+        //       <span className="newstag" style={{color: "#5996fd"}}>1111111111</span>
+        //       <span><a  className="cmt-num">111111</a></span>
+        //       <span className="render-time">2222222222</span>
+        //     </p>
+        //     <div className="operate">
+        //       <a className="del"><span>不感兴趣</span></a>
+        //     </div>
+        //   </div>
+        // </div>
+
       )
+
     }
   })
-
-
+  console.log(items)
   return (
     <div id="detail_flow" className="totop_fixed">
       <InfiniteScroll
         // initialLoad={false}
         useWindow={false}
         pageStart={0}
-        loadMore={(page) => props.loadItems(page)}
-        hasMore={props.hasMoreItems}
+        loadMore={(page) => loadItems(page, this.spinIcon)}
+        hasMore={hasMoreItems}
         // loader={<div className="loader" key={0}>Loading ...</div>}
-        loader={<div key={0} className="demo-loading-container"><Spin /></div>}
+        loader={<div key={0} className="demo-loading-container"><Spin tip="努力加载中..." /></div>}
       >
         {items}
       </InfiniteScroll>
     </div>
   )
+
+  }
 }
 
 
@@ -140,7 +177,8 @@ const mapStart = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadItems(page) {
+    loadItems(page, spinIcon) {
+      console.log('spinIcon', spinIcon)
       dispatch(actionCreators.getItemList(page))
     },
     handelItemDetele(index) {
@@ -149,6 +187,9 @@ const mapDispatch = dispatch => {
     getDetailContent(id, cateid) {
       window.scroll(0, 0)
       dispatch(actionCreators.handleGetDetailContent(id, cateid))
+    },
+    spinIcon() {
+
     }
   }
 }

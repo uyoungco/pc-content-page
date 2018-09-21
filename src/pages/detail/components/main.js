@@ -6,9 +6,9 @@ import Loadable from 'react-loadable';
 import { actionCreators } from '../store'
 import '../style.less'
 // 广告模块
-import ContentTopAds from '../ADS/content_top_gg'
-import ContentBottonAds from '../ADS/content_bottom_gg'
-import DayHotNewsBottonAds from '../ADS/day_hot_news_botton_gg'
+// import ContentTopAds from '../ADS/content_top_gg'
+// import ContentBottonAds from '../ADS/content_bottom_gg'
+// import DayHotNewsBottonAds from '../ADS/day_hot_news_botton_gg'
 
 // 栏目模块
 import DayHotNews from  './day-hot-news'
@@ -33,7 +33,6 @@ class Main extends PureComponent {
     this.props.initDetailText()
   }
   render() {
-    console.log(this.props.xgtj)
     return (
       <div id="main">
         {/* <ContentTopAds /> 广告 文章内容头部 */}
